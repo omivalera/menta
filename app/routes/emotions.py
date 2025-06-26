@@ -6,6 +6,7 @@ from app.schemas.emotions import EmotionCreate, EmotionRead
 from app.models.users import User
 from app.database import SessionLocal
 from app.routes.auth import get_current_user
+from app.services import ml_model
 
 router = APIRouter()
 
@@ -25,3 +26,12 @@ async def create_emotion(emotion: EmotionCreate, db: AsyncSession = Depends(get_
 async def get_emotions(db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
     result = await db.execute(select(Emotion).where(Emotion.user_id == current_user.id))
     return result.scalars().all()
+
+@router.post("/whatsapp", response_model=EmotionRead)
+async def process_whatsapp_message(message: str, db: AsyncSession = Depends(get_db)):
+    # Procesar mensaje de WhatsApp
+    emotion = Emotion(mood=ml_model.predict([message]), user_id=1)  # Ajusta user_id
+    db.add(emotion)
+    await db.commit()
+    await db.refresh(emotion)
+    return emotion

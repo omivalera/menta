@@ -4,8 +4,13 @@ sqlalchemy
 asyncpg
 alembic
 pydantic
+pydantic[email]
 python-dotenv
 passlib[bcrypt]
 python-jose[cryptography]
 scikit-learn
 numpy
+transformers 
+torch
+onnx
+python-multipart

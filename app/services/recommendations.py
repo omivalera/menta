@@ -6,8 +6,9 @@ from app.services.ml_model import ml_model
 
 RECOMMENDATION_TEXTS = {
     "respiracion": "Te recomendamos ejercicios de respiración para mejorar el ánimo.",
-    "meditación": "Prueba la meditación guiada para reducir la ansiedad.",
-    "seguir_así": "¡Sigue así! Mantén actividades que te generan felicidad.",
+    "meditacion": "Prueba la meditación guiada para reducir la ansiedad.",
+    "seguir_asi": "¡Sigue así! Mantén actividades que te generan felicidad.",
+    "derivar": "Parece que necesitas apoyo adicional. Te recomendamos contactar a un profesional. ¿Quieres que te conectemos con uno?"
 }
 
 def generate_recommendations(emotions):
